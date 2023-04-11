@@ -60,15 +60,14 @@ public class PajakService extends BasePajakService<Pajak, PajakDto, PajakReposit
             throw new AlurKerjaException(400, "Can't add new data");
         }
 
-        if (!ObjectUtils.isEmpty(dto.getUser()) && !ObjectUtils.isEmpty(dto.getUser().getEmail())) {
-            User user = userService.findByEmail(dto.getUser().getEmail());
-            if (user != null) {
-                dto.setUser(new UserDto().toDto(user));
-            } else {
-                dto.setUser(null);
-            }
+        User user = userService.findByEmail(getCurrentUser());
+        if (user != null) {
+            dto.setUser(new UserDto().toDto(user));
+        } else {
+            dto.setUser(null);
         }
 
+        dto.setStatus(ApplicationEnum.Status.CREATED.key);
         dto.setCreatedDate(new Date());
         dto.setCreatedBy(this.getCurrentUser());
 

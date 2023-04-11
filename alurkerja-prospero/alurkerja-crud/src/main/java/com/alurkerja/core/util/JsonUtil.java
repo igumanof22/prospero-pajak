@@ -1,6 +1,7 @@
 package com.alurkerja.core.util;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.logging.Logger;
@@ -20,6 +21,16 @@ public class JsonUtil {
 
     public static <E> E deserialize(String json, Class<E> cls) {
         try {
+            return objectMapper.readValue(json, cls);
+        } catch (Exception e) {
+            LOGGER.warning(e.getMessage());
+            return null;
+        }
+    }
+
+    public static <E> E deserializeIgnoreUnknown(String json, Class<E> cls) {
+        try {
+            objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
             return objectMapper.readValue(json, cls);
         } catch (Exception e) {
             LOGGER.warning(e.getMessage());

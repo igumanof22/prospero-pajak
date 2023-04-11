@@ -30,12 +30,12 @@ public class ApproveService extends BasePajakService<Pajak, ApproveDto, ApproveR
 
     @Override
     public boolean canView() {
-        return canAdd();
+        return canEdit();
     }
 
     @Override
     public boolean canList() {
-        return canAdd();
+        return canEdit();
     }
 
     @Override

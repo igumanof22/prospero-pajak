@@ -31,8 +31,8 @@ public class UserService {
             headers.put("userId", "SYSTEM");
             headers.put("name", "SYSTEM");
             headers.put("role", "ADMIN");
-            byte[] response = HttpUtil.get(userApiServer + "?email==" + email, headers);
-            return JsonUtil.deserialize(new String(response), User.class);
+            byte[] response = HttpUtil.get(userApiServer + "/find?email=" + email, headers);
+            return JsonUtil.deserializeIgnoreUnknown(new String(response), User.class);
         } catch (Exception e) {
             LOGGER.info(email);
             LOGGER.warning(e.getMessage());

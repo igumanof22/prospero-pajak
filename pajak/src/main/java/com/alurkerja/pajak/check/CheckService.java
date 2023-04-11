@@ -31,12 +31,12 @@ public class CheckService extends BasePajakService<Pajak, CheckDto, CheckReposit
 
     @Override
     public boolean canView() {
-        return canAdd();
+        return canEdit();
     }
 
     @Override
     public boolean canList() {
-        return canAdd();
+        return canEdit();
     }
 
     @Override

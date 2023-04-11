@@ -18,7 +18,7 @@ public class RestMvcConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(tokenInterceptor)
-                .addPathPatterns("/bpmn/**", "/crud/**")
+                .addPathPatterns("/**", "/crud/**")
                 .order(Ordered.HIGHEST_PRECEDENCE);
     }
     @Bean
